@@ -1,3 +1,4 @@
+const Dotenv = require('dotenv-webpack');
 module.exports = {
   entry: ['./src/index.js'],
   output: {
@@ -26,5 +27,11 @@ module.exports = {
       aggregateTimeout: 300,
       poll: 1000
     }
-  }
+  },
+  node: {
+    fs: 'empty'
+  },
+  plugins: [
+    new Dotenv()
+  ]
 };
