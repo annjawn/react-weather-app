@@ -2,6 +2,7 @@ import React,{ Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchWeather } from '../actions/index';
+import { Button, Grid, Form, Input, Icon } from 'semantic-ui-react';
 
 class SearchBar extends Component{
   constructor(props){
@@ -19,7 +20,7 @@ class SearchBar extends Component{
 
   onFormSubmit = (event) => {
     event.preventDefault(); //prevent browser from submitting the form
-    
+
     this.props.fetchWeather(this.state.term);
 
     this.setState({ term: ''});
@@ -27,16 +28,22 @@ class SearchBar extends Component{
 
   render() {
     return(
-      <form className="input-group" onSubmit={this.onFormSubmit}>
-        <input
-          placeholder="Search for a city to get a five day forecast"
-          value={this.state.term}
-          onChange={event => {this.setState({ term: event.target.value })}}
-        />
-        <span className="input-group-button">
-          <button type="submit" className="btn btn-secondary">Submit</button>
-        </span>
-      </form>
+
+        <Form onSubmit={this.onFormSubmit}>
+          <Form.Group>
+            <Form.Field width={10}>
+              <Input
+                icon={<Icon name='search' inverted circular link />}
+                size="large"
+                placeholder="Search for a city to get a five day forecast"
+                value={this.state.term}
+                onChange={event => {this.setState({ term: event.target.value })}}
+              />
+            </Form.Field>
+            <Button type="submit" floated="right" width={6}>Search</Button>
+          </Form.Group>
+        </Form>
+
     );
   }
 }
